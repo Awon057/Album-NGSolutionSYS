@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Album name : "
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/albumname"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="awon"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/user"/>
+
+</LinearLayout>
