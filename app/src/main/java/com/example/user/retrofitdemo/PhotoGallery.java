@@ -37,11 +37,12 @@ public class PhotoGallery extends AppCompatActivity {
     private Retrofit mRetrofit;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private  GallaryAdapter adapter;
+    private GallaryAdapter adapter;
     private List<photo> photos;
     private ApiInterface apiInterface;
     private DatabaseHelper myHelper;
     private SQLiteDatabase sqliteDB;
+    private ArrayList<String> photoData;
 
 
     @Override
@@ -57,26 +58,11 @@ public class PhotoGallery extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        ArrayList<String> photoData = getIntent().getStringArrayListExtra("DataArray");
+        photoData = getIntent().getStringArrayListExtra("DataArray");
         final int value = getIntent().getIntExtra("ID",0);
 
         adapter.setLinks(photoData);
 
-
-
-        /*if(value == 0) {
-
-            Glide.with(this)
-                    .load("https://c1.staticflickr.com/9/8008/7479371438_1ac292b9b9_b.jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageView);
-        }
-        else {
-            Glide.with(this)
-                    .load("https://www.acsu.buffalo.edu/~naziarah/3.jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageView);
-        }*/
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.user.retrofitdemo;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,16 +62,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
                 Log.d("Test",photos.size()+"");
                 adapter.setPhotos(photos);
 
-                for (int i=0;i<photos.size();i++)
+               /* for (int i=0;i<photos.size();i++)
                 {
                     ArrayList<String > aaa =photos.get(i).getImages();
                     for (String S: aaa){
 
                     }
-                }
-
-
-                Toast.makeText(MainActivity.this,"Data Size " +photos.size(), Toast.LENGTH_SHORT).show();
+                }*/
+                //Toast.makeText(MainActivity.this,"Data Size " +photos.size(), Toast.LENGTH_SHORT).show();
                     try{
                         for (int i=0;i<photos.size();i++) {
                             ContentValues cv = new ContentValues();
@@ -79,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
                             final Long id = sqliteDB.insert("Task", null, cv);
 
                             ContentValues imv = new ContentValues();
-                            ArrayList<String > imageLink =photos.get(i).getImages();
+                            ArrayList<String > imageLink = photos.get(i).getImages();
+
                             for (String S: imageLink){
-                                cv.put("Id",id);
-                                cv.put("Link",S);
+                                imv.put("Id",id);
+                                imv.put("Link",S);
+                                Log.d("ArrayInput",S);
                                 sqliteDB.insert("Image",null,imv);
                             }
-
 
                             //cv.put("Id",id);
                             //Toast.makeText(MainActivity.this, "Data Inserted " + id, Toast.LENGTH_SHORT).show();

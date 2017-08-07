@@ -2,12 +2,15 @@ package com.example.user.retrofitdemo;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,7 @@ public class GallaryAdapter extends RecyclerView.Adapter<GallaryAdapter.MyViewHo
         Glide.with(context)
                 .load(links.get(position))
                 .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.mImageView);
     }
 
@@ -56,7 +60,7 @@ public class GallaryAdapter extends RecyclerView.Adapter<GallaryAdapter.MyViewHo
         public MyViewHolder(View itemView) {
             super(itemView);
             mImageView =(ImageView) itemView.findViewById(R.id.imageView);
-        }
 
+        }
     }
 }
