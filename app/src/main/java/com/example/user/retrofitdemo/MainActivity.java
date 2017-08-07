@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
 
                     }
                 }*/
+
+
                 //Toast.makeText(MainActivity.this,"Data Size " +photos.size(), Toast.LENGTH_SHORT).show();
                     try{
                         for (int i=0;i<photos.size();i++) {
@@ -79,13 +81,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
 
                             ContentValues imv = new ContentValues();
                             ArrayList<String > imageLink = photos.get(i).getImages();
-
                             for (String S: imageLink){
                                 imv.put("Id",id);
                                 imv.put("Link",S);
-                                Log.d("ArrayInput",S);
                                 sqliteDB.insert("Image",null,imv);
                             }
+
 
                             //cv.put("Id",id);
                             //Toast.makeText(MainActivity.this, "Data Inserted " + id, Toast.LENGTH_SHORT).show();

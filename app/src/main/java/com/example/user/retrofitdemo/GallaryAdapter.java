@@ -1,6 +1,7 @@
 package com.example.user.retrofitdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -54,13 +55,23 @@ public class GallaryAdapter extends RecyclerView.Adapter<GallaryAdapter.MyViewHo
             return 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView mImageView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             mImageView =(ImageView) itemView.findViewById(R.id.imageView);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if(position != RecyclerView.NO_POSITION){
+                Intent ii = new Intent(context,DetailImage.class);
+                ii.putExtra("URL",links.get(position).toString());
+                context.startActivity(ii);
+            }
         }
     }
 }
