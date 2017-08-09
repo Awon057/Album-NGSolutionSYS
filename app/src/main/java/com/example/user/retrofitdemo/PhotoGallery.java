@@ -60,6 +60,7 @@ public class PhotoGallery extends AppCompatActivity {
 
         photoData = getIntent().getStringArrayListExtra("DataArray");
         final int value = getIntent().getIntExtra("ID",0);
+        //Log.d("DataId", String.valueOf(value));
 
         adapter.setLinks(photoData);
 

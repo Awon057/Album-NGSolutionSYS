@@ -1,5 +1,12 @@
 package com.example.user.retrofitdemo;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.io.File;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -9,13 +16,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    public static final String Base_URL = "https://demo8544954.mockable.io/";
-    public static Retrofit retrofit = null;
 
-    public static Retrofit getApiClient(){
-        if(retrofit==null){
-            retrofit = new Retrofit.Builder().baseUrl(Base_URL).addConverterFactory(GsonConverterFactory.create()).build();
+    public static final String Base_URL = "https://demo8544954.mockable.io/";
+    public  Retrofit retrofit = null;
+    OkHttpClient okHttpClient;
+
+    public void setOkHttpClient(Cache cache) {
+        Log.d("Cache",cache.toString());
+        okHttpClient = new OkHttpClient.Builder()
+                .cache(cache)
+                .build();
+    }
+
+    public Retrofit getApiClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(Base_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
         return retrofit;
     }
+
 }

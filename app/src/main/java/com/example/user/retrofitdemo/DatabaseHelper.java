@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS Task(Id integer primary key autoincrement, Name VARCHAR,Email VARCHAR);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Task(Id integer primary key, Name VARCHAR,Email VARCHAR);");
         db.execSQL("CREATE TABLE IF NOT EXISTS Image(Id integer, Link VARCHAR);");
 
     }

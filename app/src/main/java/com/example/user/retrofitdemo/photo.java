@@ -17,6 +17,11 @@ public class photo {
     @SerializedName("images")
     private ArrayList<String> images;
 
+    public photo(String name, String user) {
+        this.albumName=name;
+        this.userName=user;
+    }
+
     public ArrayList<String> getImages() {
         return images;
     }
