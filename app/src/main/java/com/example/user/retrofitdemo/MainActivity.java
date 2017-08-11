@@ -26,6 +26,7 @@ import retrofit2.Response;
 
 import static android.R.attr.id;
 import static com.example.user.retrofitdemo.R.id.albumname;
+import static com.example.user.retrofitdemo.R.id.contentPanel;
 import static com.example.user.retrofitdemo.R.id.image;
 import static com.example.user.retrofitdemo.R.id.user;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         dbData = new ArrayList<>();
 
         sp = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sp.edit();
+        SharedPreferences.Editor editor = sp.edit();
 
         String value = sp.getString("KEY", null);
 
@@ -75,51 +76,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
 
         if (value == null) {
             if (active != null && active.isConnectedOrConnecting()) {
-                ApiClient api = new ApiClient();
-                Cache cache = new Cache(getCacheDir(), 5 * 1024 * 1024);
-                api.setOkHttpClient(cache);
-                apiInterface = api.getApiClient().create(ApiInterface.class);
-
-                Call<Photos> call = apiInterface.getPhotos();
-                call.enqueue(new Callback<Photos>() {
-                    @Override
-                    public void onResponse(Call<Photos> call, Response<Photos> response) {
-                        photos = response.body().getPhotos();
-                        Log.d("Test", photos.size() + "");
-                        adapter.setPhotos(photos);
-
-                        try {
-                            sqliteDB.delete("Task", null, null);
-                            sqliteDB.delete("Image", null, null);
-                            for (int i = 0; i < photos.size(); i++) {
-                                ContentValues cv = new ContentValues();
-                                cv.put("Name", photos.get(i).getAlbumName());
-                                cv.put("Email", photos.get(i).getUserName());
-                                final Long id = sqliteDB.insert("Task", null, cv);
-
-                                ContentValues imv = new ContentValues();
-                                ArrayList<String> imageLink = photos.get(i).getImages();
-                                for (String S : imageLink) {
-                                    imv.put("Id", i);
-                                    imv.put("Link", S);
-                                    sqliteDB.insert("Image", null, imv);
-                                }
-                                editor.putString("KEY", "ASD");
-                                editor.commit();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Photos> call, Throwable t) {
-                        call.cancel();
-                        Log.d("Test", "Fail");
-                    }
-                });
-
+                dataSave();
             } else {
                 Toast.makeText(getApplicationContext(), "Please Connect to the interner for the first time to Load data",
                         Toast.LENGTH_LONG).show();
@@ -127,60 +84,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
 
         } else {
             if (active != null && active.isConnectedOrConnecting()) {
-                ApiClient api = new ApiClient();
-                Cache cache = new Cache(getCacheDir(), 5 * 1024 * 1024);
-                api.setOkHttpClient(cache);
-                apiInterface = api.getApiClient().create(ApiInterface.class);
-
-                Call<Photos> call = apiInterface.getPhotos();
-                call.enqueue(new Callback<Photos>() {
-                    @Override
-                    public void onResponse(Call<Photos> call, Response<Photos> response) {
-                        photos = response.body().getPhotos();
-                        Log.d("Test", photos.size() + "");
-                        adapter.setPhotos(photos);
-
-                        try {
-                            sqliteDB.delete("Task", null, null);
-                            sqliteDB.delete("Image", null, null);
-                            for (int i = 0; i < photos.size(); i++) {
-                                ContentValues cv = new ContentValues();
-                                cv.put("Name", photos.get(i).getAlbumName());
-                                cv.put("Email", photos.get(i).getUserName());
-                                final Long id = sqliteDB.insert("Task", null, cv);
-
-                            /*Log.d("Database", String.valueOf(id));
-                            Log.d("Database", photos.get(i).getAlbumName());
-                            Log.d("Database", photos.get(i).getUserName());*/
-
-                                ContentValues imv = new ContentValues();
-                                ArrayList<String> imageLink = photos.get(i).getImages();
-                                for (String S : imageLink) {
-                                    imv.put("Id", i);
-                                    imv.put("Link", S);
-                                    sqliteDB.insert("Image", null, imv);
-                                }
-
-
-                                //cv.put("Id",id);
-                                //Toast.makeText(MainActivity.this, "Data Inserted " + id, Toast.LENGTH_SHORT).show();
-                                //Toast.makeText(CreateTask.this,String.valueOf(id),Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Photos> call, Throwable t) {
-                        call.cancel();
-                        Log.d("Test", "Fail");
-                    }
-                });
+                dataSave();
             } else {
                 //  adapter.setPhotos(photos);
                 // photos.clear();
+
                 String[] columns = {"id", "Name", "Email"};
                 Cursor c = sqliteDB.query("Task", columns, null, null, null, null, null);
                 while (c.moveToNext()) {
@@ -203,9 +111,37 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
                 c.close();
             }
         }
+    }
 
+    public void dataSave(){
 
+        final SharedPreferences.Editor editor = sp.edit();
+        ApiClient api = new ApiClient();
+        Cache cache = new Cache(getCacheDir(), 5 * 1024 * 1024);
+        api.setOkHttpClient(cache);
+        apiInterface = api.getApiClient().create(ApiInterface.class);
 
+        Call<Photos> call = apiInterface.getPhotos();
+        call.enqueue(new Callback<Photos>() {
+            @Override
+            public void onResponse(Call<Photos> call, Response<Photos> response) {
+                photos = response.body().getPhotos();
+                Log.d("Test", photos.size() + "");
+                adapter.setPhotos(photos);
+
+              //  Log.d("Task","BackgroundTask");
+                BackgroundTask mBackgroundTask = new BackgroundTask(getApplicationContext());
+                mBackgroundTask.execute(sqliteDB,photos);
+                editor.putString("KEY", "ASD");
+                editor.commit();
+            }
+
+            @Override
+            public void onFailure(Call<Photos> call, Throwable t) {
+                call.cancel();
+                Log.d("Test", "Fail");
+            }
+        });
 
     }
 
@@ -248,4 +184,5 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         //  Toast.makeText(getApplicationContext(), position + "", Toast.LENGTH_SHORT).show();
 
     }
+
 }
