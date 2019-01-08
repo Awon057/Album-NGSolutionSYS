@@ -1,7 +1,9 @@
 package com.example.user.retrofitdemo.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,17 +63,24 @@ public class GallaryAdapter extends RecyclerView.Adapter<GallaryAdapter.MyViewHo
         public MyViewHolder(View itemView) {
             super(itemView);
             mImageView =(ImageView) itemView.findViewById(R.id.imageView);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        Intent ii = new Intent(context,DetailImage.class);
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation((Activity) context, (View)mImageView, "image");
+                        ii.putExtra("URL",links.get(position).toString());
+                        context.startActivity(ii, options.toBundle());
+                    }
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
-            if(position != RecyclerView.NO_POSITION){
-                Intent ii = new Intent(context,DetailImage.class);
-                ii.putExtra("URL",links.get(position).toString());
-                context.startActivity(ii);
-            }
+
         }
     }
 }

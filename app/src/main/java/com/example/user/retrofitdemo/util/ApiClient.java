@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
 
-    public static final String Base_URL = "https://demo8544954.mockable.io/";
+    public static final String Base_URL = "http://demo6706219.mockable.io/";
     public  Retrofit retrofit = null;
     OkHttpClient okHttpClient;
 

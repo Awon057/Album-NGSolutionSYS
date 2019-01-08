@@ -1,5 +1,7 @@
 package com.example.user.retrofitdemo.activity;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,13 +45,12 @@ public class PhotoGallery extends AppCompatActivity {
         adapter = new GallaryAdapter(this);
         recyclerView.setAdapter(adapter);
 
-
         photoData = getIntent().getStringArrayListExtra("DataArray");
         final int value = getIntent().getIntExtra("ID",0);
         //Log.d("DataId", String.valueOf(value));
-
         adapter.setLinks(photoData);
 
-    }
+        //Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this,sharedView,sharedView.get)
 
+    }
 }
