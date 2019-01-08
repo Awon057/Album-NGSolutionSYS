@@ -2,6 +2,7 @@ package com.example.user.retrofitdemo.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +47,13 @@ public class PhotoGallery extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        layoutManager = new GridLayoutManager(this,2);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            layoutManager = new GridLayoutManager(this,2);
+        }
+        else{
+            layoutManager = new GridLayoutManager(this,4);
+        }
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new GallaryAdapter(this);
@@ -54,7 +61,6 @@ public class PhotoGallery extends AppCompatActivity {
 
         photoData = getIntent().getStringArrayListExtra("DataArray");
         final int value = getIntent().getIntExtra("ID",0);
-        //Log.d("DataId", String.valueOf(value));
         adapter.setLinks(photoData);
     }
 
