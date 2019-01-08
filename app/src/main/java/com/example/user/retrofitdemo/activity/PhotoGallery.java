@@ -3,6 +3,7 @@ package com.example.user.retrofitdemo.activity;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -38,6 +39,11 @@ public class PhotoGallery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_gallery);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Image List");
+        // Enabling Up / Back navigation
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
@@ -49,8 +55,5 @@ public class PhotoGallery extends AppCompatActivity {
         final int value = getIntent().getIntExtra("ID",0);
         //Log.d("DataId", String.valueOf(value));
         adapter.setLinks(photoData);
-
-        //Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this,sharedView,sharedView.get)
-
     }
 }

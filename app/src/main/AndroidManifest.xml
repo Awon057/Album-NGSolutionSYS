@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PhotoGallery" />
-        <activity android:name=".activity.DetailImage"></activity>
+        <activity android:name=".activity.PhotoGallery"
+            android:parentActivityName=".activity.MainActivity"/>
+        <activity android:name=".activity.DetailImage"/>
     </application>
 
 </manifest>
