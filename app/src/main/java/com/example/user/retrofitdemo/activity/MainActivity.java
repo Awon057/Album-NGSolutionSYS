@@ -186,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         i.putExtra("ID", position);
         i.putStringArrayListExtra("DataArray", imageLink);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
         //  Toast.makeText(getApplicationContext(), position + "", Toast.LENGTH_SHORT).show();
 

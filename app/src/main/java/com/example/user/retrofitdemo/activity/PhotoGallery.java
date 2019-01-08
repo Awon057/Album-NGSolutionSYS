@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.example.user.retrofitdemo.util.ApiInterface;
 import com.example.user.retrofitdemo.data.DatabaseHelper;
@@ -55,5 +56,24 @@ public class PhotoGallery extends AppCompatActivity {
         final int value = getIntent().getIntExtra("ID",0);
         //Log.d("DataId", String.valueOf(value));
         adapter.setLinks(photoData);
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // todo: goto back activity from here
+                finish();
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
