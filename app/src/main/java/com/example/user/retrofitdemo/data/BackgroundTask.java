@@ -1,9 +1,10 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.widget.Toast;
+
+import com.example.user.retrofitdemo.model.photo;
 
 import java.util.List;
 

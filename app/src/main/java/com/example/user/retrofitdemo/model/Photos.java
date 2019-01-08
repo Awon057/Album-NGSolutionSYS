@@ -1,5 +1,6 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.model;
 
+import com.example.user.retrofitdemo.model.photo;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.util;
 
 import android.view.View;
 

@@ -1,35 +1,21 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.activity;
 
-import android.app.ProgressDialog;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.user.retrofitdemo.util.ApiInterface;
+import com.example.user.retrofitdemo.data.DatabaseHelper;
+import com.example.user.retrofitdemo.adapter.GallaryAdapter;
+import com.example.user.retrofitdemo.R;
+import com.example.user.retrofitdemo.model.photo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.user.retrofitdemo.R.id.albumname;
-import static com.example.user.retrofitdemo.R.id.user;
 
 public class PhotoGallery extends AppCompatActivity {
 

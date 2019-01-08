@@ -1,13 +1,15 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.user.retrofitdemo.R;
+import com.example.user.retrofitdemo.model.Photos;
+import com.example.user.retrofitdemo.model.photo;
 
 import java.util.ArrayList;
 import java.util.List;

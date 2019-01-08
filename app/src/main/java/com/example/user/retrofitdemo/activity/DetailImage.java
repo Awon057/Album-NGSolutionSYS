@@ -1,4 +1,4 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.user.retrofitdemo.R;
 
 public class DetailImage extends AppCompatActivity {
 

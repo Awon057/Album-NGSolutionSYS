@@ -1,10 +1,9 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.util;
 
-import java.util.List;
+import com.example.user.retrofitdemo.model.Photos;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 
 /**
  * Created by User on 8/2/2017.

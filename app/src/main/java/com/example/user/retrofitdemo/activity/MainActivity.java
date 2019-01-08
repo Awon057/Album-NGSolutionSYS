@@ -1,6 +1,5 @@
-package com.example.user.retrofitdemo;
+package com.example.user.retrofitdemo.activity;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +15,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.user.retrofitdemo.util.ApiClient;
+import com.example.user.retrofitdemo.util.ApiInterface;
+import com.example.user.retrofitdemo.data.BackgroundTask;
+import com.example.user.retrofitdemo.data.DatabaseHelper;
+import com.example.user.retrofitdemo.model.Photos;
+import com.example.user.retrofitdemo.R;
+import com.example.user.retrofitdemo.adapter.RecyclerAdapter;
+import com.example.user.retrofitdemo.model.photo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +31,6 @@ import okhttp3.Cache;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.R.attr.id;
-import static com.example.user.retrofitdemo.R.id.albumname;
-import static com.example.user.retrofitdemo.R.id.contentPanel;
-import static com.example.user.retrofitdemo.R.id.image;
-import static com.example.user.retrofitdemo.R.id.user;
 
 public class MainActivity extends AppCompatActivity implements RecyclerAdapter.OnclickListener {
 
